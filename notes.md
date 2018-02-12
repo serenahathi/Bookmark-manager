@@ -7,6 +7,11 @@ $ rvm list
 $ rvm use 2.5.0
 $ rvm --default use 2.5.0
 ```
+```plain
+$ rspec -fd  (shows tests with headings)
+$ for i in `seq 50` ; do rspec spec ; [[ ! $? = 0 ]] && break ; done (runs 50 tests)
+$ rspec --fail-fast
+```
 ```ruby
 require 'sinatra/base' in app.rb
 class BookmarkManager < Sinatra::Base
