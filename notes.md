@@ -109,10 +109,12 @@ SELECT * FROM table;
 Delete stuff
 ```plain
 DELETE FROM links WHERE id = 3;
+DELETE FROM links WHERE url = 'http://www.twitter.com';
 ```
 Update stuff
 ```plain
-UPDATE links SET url = 'http://www.google.com' WHERE id = 2;
+UPDATE links SET url = 'http://www.google.com' WHERE id = 2
+UPDATE links SET url = 'http://www.google.com' WHERE url = 'http://www.askjeeves.com';
 ```
 Add stuff to increment ID (since it's `SERIAL` type)
 ```plain
