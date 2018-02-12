@@ -120,3 +120,30 @@ Add stuff to increment ID (since it's `SERIAL` type)
 ```plain
 INSERT INTO links (url) VALUES ('http://www.makersacademy.com');
 ```
+### ex 6 Interacting with PostgreSQL from Ruby
+--> remove the hard-coded array of links and read them from a database instead.
+
+```ruby
+# Inside lib/link.rb
+require 'pg'
+
+class Link
+  def self.all
+    connection = PG.connect(dbname: 'bookmark_manager')
+    result = connection.exec("SELECT * FROM links")
+    result.map { |link| link['url'] }
+  end
+end
+```
+```plain
+connection = PG.connect(dbname: 'bookmark_manager')
+```
+We ask the PG class (provided by the pg gem) to connect to the database called 'bookmark manager'. It returns a connection (which we store in a variable called connection). We can ask connection to do things, like query the database.
+```plain
+result = connection.exec("SELECT * FROM links")
+```
+We ask the connection to execute some SQL: SELECT * FROM links. This SQL will fetch all links, and the resulting 'result object' is stored in a variable called result.
+```plain
+result.map { |link| link['url'] }
+```
+The result object contains the links, each of which is a hash of the link ID and link URL. We map each hash to the url key of the hash. This gives us an array of the link URLs.
