@@ -90,4 +90,27 @@ Enter the table (show columns)
 ```plain
 \d tablename
 ```
-varchar - character varying - text limited in charactes (eg. to 60). 
+varchar - character varying - text limited in charactes (eg. to 60).
+
+## ex 5 - Insert to / delete from table
+
+Nice explanation of insertion :)
+```plain
+CREATE TABLE lists(id serial, col2 text, col3 text, ...);
+      *If you don't specify "id", it will autogenerate for you:*
+INSERT INTO lists(col2, col3, ...) VALUES('KO','SPH', ...);
+      *You can also specify using DEFAULT (the same as above):*
+INSERT INTO lists(id, col2, col3, ...) VALUES(DEFAULT, 'KO','SPH', ...);
+```
+Select all stuff from table
+```plain
+SELECT * FROM table;
+```
+Delete stuff
+```plain
+DELETE FROM links WHERE id = 3;
+```
+Update stuff
+```plain
+UPDATE links SET url = 'http://www.google.com' WHERE id = 2;
+```
