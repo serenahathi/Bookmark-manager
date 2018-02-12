@@ -5,9 +5,9 @@ describe Link do
     it 'returns all links' do
       links = Link.all
 
-      expect(Link.all).to include("http://www.makersacademy.com")
-      expect(Link.all).to include("http://www.google.com")
-      expect(Link.all).to include("http://www.facebook.com")
+      expect(links).to include("http://www.makersacademy.com")
+      expect(links).to include("http://www.google.com")
+      expect(links).to include("http://www.facebook.com")
     end
   end
-end
+end 

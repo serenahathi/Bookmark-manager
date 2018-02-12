@@ -68,3 +68,7 @@ $ \l
 ```plain
 $ \q
 ```
+### postgres cheat sheet
+https://blog.jasonmeridth.com/posts/postgresql-command-line-cheat-sheet/
+
+## ex. 4
