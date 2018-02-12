@@ -15,7 +15,7 @@ gem 'sinatra'
 gem 'rspec'
 gem 'capybara'
 ```
-Useful rspec methods 
+Useful rspec methods
 ```plain
 $ rspec -fd  (shows tests with headings)
 $ for i in `seq 50` ; do rspec spec ; [[ ! $? = 0 ]] && break ; done (runs 50 tests)
@@ -72,3 +72,22 @@ $ \q
 https://blog.jasonmeridth.com/posts/postgresql-command-line-cheat-sheet/
 
 ## ex. 4
+Connect to database in postgres (first enter postgres by `psql postgres`)
+```plain
+\c bookmark_manager
+```
+Creating table in postgres
+```plain
+CREATE TABLE weather (
+    city            varchar(80),
+    temp_lo         int,           -- low temperature
+    temp_hi         int,           -- high temperature
+    prcp            real,          -- precipitation
+    date            date
+);
+```
+Enter the table (show columns)
+```plain
+\d tablename
+```
+varchar - character varying - text limited in charactes (eg. to 60). 
