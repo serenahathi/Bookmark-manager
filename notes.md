@@ -1,6 +1,35 @@
 ## ex. 1 Creating User Stories
+## ex. 2 setup project
+```plain
+$ rspec --init
+$ bundle init
+$ rvm list
+$ rvm use 2.5.0
+$ rvm --default use 2.5.0
+```
+```ruby
+require 'sinatra/base' in app.rb
+class BookmarkManager < Sinatra::Base
 
+  run! if app_file == $0
+end
+```
+In spec_helper:
+```ruby
+ENV['RACK_ENV'] = 'test'
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
+require 'capybara'
+require 'capybara/rspec'
+require 'rspec'
+require_relative './features/web_helpers'
 
+Capybara.app = BookmarkManager
+```
+In config.ru
+```plain
+require_relative "./app"
+run BookmarkManager
+```
 
 ## ex. 3 Creating postgres database
 - to enter a database and open postgresql irb type
