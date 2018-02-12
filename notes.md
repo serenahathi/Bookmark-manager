@@ -114,3 +114,7 @@ Update stuff
 ```plain
 UPDATE links SET url = 'http://www.google.com' WHERE id = 2;
 ```
+Add stuff to increment ID (since it's `SERIAL` type)
+```plain
+INSERT INTO links (url) VALUES ('http://www.makersacademy.com');
+```
