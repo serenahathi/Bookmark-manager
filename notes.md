@@ -2,10 +2,24 @@
 ## ex. 2 setup project
 ```plain
 $ rspec --init
-$ bundle init
+$ bundle init (creates gemfile)
 $ rvm list
 $ rvm use 2.5.0
 $ rvm --default use 2.5.0
+```
+Inside gemfile
+```plain
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'rspec'
+gem 'capybara'
+```
+Useful rspec methods 
+```plain
+$ rspec -fd  (shows tests with headings)
+$ for i in `seq 50` ; do rspec spec ; [[ ! $? = 0 ]] && break ; done (runs 50 tests)
+$ rspec --fail-fast
 ```
 ```plain
 $ rspec -fd  (shows tests with headings)
