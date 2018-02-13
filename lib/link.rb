@@ -1,6 +1,7 @@
 require 'pg'
 
 class Link
+
   def self.all
     if ENV['ENVIRONMENT'] == "test"
       connection = PG.connect(dbname: 'bookmark_manager_test')

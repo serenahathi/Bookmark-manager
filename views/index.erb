@@ -1,14 +1,12 @@
 <html>
   <head></head>
   <body>
-    <div class="title">
-      Links:
-    </div>
-    <div>
-      <ul>
-      <% @links.each do |link| %>
-        <li> <%= link %> </li>
-      <% end %>
-    </div>
+  <form action="/links" method="get">
+    <input type="submit" value="View all links">
+  </form>
+  <form action="/url" method="post">
+    <input type="text" name="url" placeholder="Enter URL here">
+    <input type="submit" value="Add link">
+  </form>
   </body>
 </html>
