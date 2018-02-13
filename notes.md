@@ -149,11 +149,11 @@ result.map { |link| link['url'] }
 ```
 The result object contains the links, each of which is a hash of the link ID and link URL. We map each hash to the url key of the hash. This gives us an array of the link URLs.
 
-### Exercise 7
+## Exercise 7 - TablePlus
 
-When using TablePlus click on 'Navigate' then 'Switch database' and select the database required. Any tables should then appear under 'Items'. 
+When using TablePlus click on 'Navigate' then 'Switch database' and select the database required. Any tables should then appear under 'Items'.
 
-Click on the command line button (top left) to open a new SQL query. Use SELECT, FROM etc to interact with the database.
+Click on the command line button (top left) to open a new SQL query. Use `SELECT`, `FROM` etc to interact with the database.
 
 When executing two commands use a semi-colon at the end of the first command
 
@@ -170,4 +170,46 @@ To delete mulitple entries in one go:
 DELETE FROM links WHERE id IN (8, 9, 10);
 SELECT * FROM links;
 ```
+## 8 Exercise 8 - seting up a testing environment
+CREATE DATABASE 'bookmark_manager_test';
+\c bookmark_manager_test
+CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60));
 
+ENV['ENVIRONMENT'] = 'test'in spec_helper.rb - sets the environment to test status.
+Spec_helper.rb file is run only when using rspec. When we use rackup, we don't run this file, so the enviroment won't be the test environment.
+
+```ruby
+# in lib/link.rb
+require 'pg'
+
+class Link
+  def self.all
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      connection = PG.connect(dbname: 'bookmark_manager')
+    end
+
+    result = connection.exec("SELECT * FROM links")
+    result.map { |link| link['url'] }
+  end
+end
+```
+Here we tell our link class that if the enviroment is test (it is when rspec), then load links from test database. Otherwise (when rackup) - load from normal db.
+
+
+We create test_database_setup in spec folder, where we load the data to our test database. THen, before running rspec, we run
+```plain
+$ ruby spec/test_database_setup.rb
+```
+
+connection.exec("TRUNCATE links;") - clears database of all data. We can run the ruby spec/test_database_setup.rb + rspec sequence many times in a row.
+
+Instead of running spec/test_database_setup.rb + rspec each time, we can require the test_database_setup file in the spechelper by typing:
+
+```ruby
+# in spec_helper.rb
+config.before(:each) do
+  require_relative './test_database_setup'
+end
+```
