@@ -213,3 +213,22 @@ config.before(:each) do
   require_relative './test_database_setup'
 end
 ```
+
+## ex. 10
+
+# in lib/database_connection.rb
+
+```ruby
+require 'pg'
+
+class DatabaseConnection
+  def self.setup(dbname)
+    @connection = PG.connect(dbname: dbname)
+  end
+
+  def self.connection
+    @connection
+  end
+end
+```
+We're using a class instance variable to store the connection. We can do this because our DatabaseConnection is never going to be instantiated. It's a 'Singleton' object: there's only one DatabaseConnection in the application.
