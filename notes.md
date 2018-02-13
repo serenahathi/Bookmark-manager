@@ -148,3 +148,26 @@ We ask the connection to execute some SQL: SELECT * FROM links. This SQL will fe
 result.map { |link| link['url'] }
 ```
 The result object contains the links, each of which is a hash of the link ID and link URL. We map each hash to the url key of the hash. This gives us an array of the link URLs.
+
+### Exercise 7
+
+When using TablePlus click on 'Navigate' then 'Switch database' and select the database required. Any tables should then appear under 'Items'. 
+
+Click on the command line button (top left) to open a new SQL query. Use SELECT, FROM etc to interact with the database.
+
+When executing two commands use a semi-colon at the end of the first command
+
+```plain
+INSERT INTO links(url) VALUES (’http://www.theguardian.com');
+SELECT * FROM links
+```
+
+Don't leave old commands in the query because they will be re-run and create multiple entries
+
+To delete mulitple entries in one go:
+
+```plain
+DELETE FROM links WHERE id IN (8, 9, 10);
+SELECT * FROM links;
+```
+
