@@ -102,6 +102,10 @@ INSERT INTO lists(col2, col3, ...) VALUES('KO','SPH', ...);
       *You can also specify using DEFAULT (the same as above):*
 INSERT INTO lists(id, col2, col3, ...) VALUES(DEFAULT, 'KO','SPH', ...);
 ```
+Add stuff to increment ID (since it's `SERIAL` type)
+```plain
+INSERT INTO links (url) VALUES ('http://www.makersacademy.com');
+```
 Select all stuff from table
 ```plain
 SELECT * FROM table;
@@ -116,10 +120,7 @@ Update stuff
 UPDATE links SET url = 'http://www.google.com' WHERE id = 2
 UPDATE links SET url = 'http://www.google.com' WHERE url = 'http://www.askjeeves.com';
 ```
-Add stuff to increment ID (since it's `SERIAL` type)
-```plain
-INSERT INTO links (url) VALUES ('http://www.makersacademy.com');
-```
+
 ### ex 6 Interacting with PostgreSQL from Ruby
 --> remove the hard-coded array of links and read them from a database instead.
 
