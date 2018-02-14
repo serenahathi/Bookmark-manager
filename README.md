@@ -1,3 +1,13 @@
+## Database setup requirements
+Add rake to the gemfile: ```gem rake```
+
+Run ```bundle``` in the terminal, to download it, along with other missing gems.
+
+## Database setup
+In order to have the databases setup for this project, please run the following commands:
+```rake setup```
+```rake test_database_setup```
+
 ## Planned link structure
 Links will be stored in array of links in Link class. 
 Each link will be a hash having a key-value pairs of: name, tag, url and description.

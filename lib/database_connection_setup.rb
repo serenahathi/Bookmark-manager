@@ -5,4 +5,3 @@ if ENV['environment'] == 'test'
 else
   DatabaseConnection.setup('bookmark_manager')
 end
-

@@ -1,6 +1,9 @@
 require 'sinatra/base'
 require './lib/link'
-require './database_connection_setup'
+require './lib/database_connection_setup'
+
+# require_relative 'weirdthing.rb'
+# include EnvSetup
 
 class BookmarkManager < Sinatra::Base
   get "/" do

@@ -8,6 +8,7 @@ git_source(:github) {|repo_name| "https://github.com/#{Kotauror/Bookmark-manager
 
 # gem "rails"
 gem 'capybara'
+gem 'pg'
+gem 'rake'
 gem 'rspec'
 gem 'sinatra'
-gem 'pg'
