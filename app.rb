@@ -1,11 +1,14 @@
 require 'sinatra/base'
 require './lib/link'
 require './lib/database_connection_setup'
+require 'sinatra/flash'
 
 # require_relative 'weirdthing.rb'
 # include EnvSetup
 
 class BookmarkManager < Sinatra::Base
+  enable :sessions
+
   get "/" do
     @links = Link.all
     erb(:index)
