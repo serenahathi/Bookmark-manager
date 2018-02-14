@@ -3,9 +3,14 @@ require 'pg'
 task :setup do
   ['bookmark_manager', 'bookmark_manager_test'].each do |database|
     connection = PG.connect
-    connection.exec("CREATE DATABASE #{database};")
+    
+    begin
+      connection.exec("CREATE DATABASE #{database};")
+    rescue
+    end
+
     connection = PG.connect(dbname: database)
-    connection.exec("CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60));")
+    connection.exec("CREATE TABLE IF NOT EXISTS links(id SERIAL PRIMARY KEY, url VARCHAR(60));")
   end
 end
 
