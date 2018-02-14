@@ -15,8 +15,11 @@ Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
 
+  ### Not recognising the method, This is to get rid of NOTICE when running tests
+  ## config.use_transactional_fixtures = false
+
   config.before(:each) do
-    Rake::Task['setup'].execute
+    # Rake::Task['setup'].execute
     Rake::Task['test_database_setup'].execute
   end
 
