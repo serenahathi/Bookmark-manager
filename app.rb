@@ -8,6 +8,7 @@ require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+  register Sinatra::Flash
 
   get "/" do
     @links = Link.all
@@ -15,7 +16,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   post "/url" do
-    Link.create(url: params[:url]) # we pass a hash cause db has a hash structure
+    begin 
+      Link.create(params[:url])
+    rescue => e
+      flash[:error] = e.message
+    end
+    
     redirect("/")
   end
 

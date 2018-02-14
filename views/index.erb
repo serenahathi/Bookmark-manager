@@ -6,6 +6,8 @@
       <input type="submit" value="Add link">
     </form>
     <div>
+      <%= flash[:notice] %>
+
       <ul>
         <% @links.each do |link| %>
           <li>
