@@ -17,10 +17,5 @@ RSpec.describe DatabaseConnection do
   end
 end
 
-  describe ".connection" do
-    it "allows us to access the connection" do
-      connection = DatabaseConnection.setup("bookmark_manager_test")
-      expect(DatabaseConnection.connection).to eq connection
-    end
-  end
+
 end
