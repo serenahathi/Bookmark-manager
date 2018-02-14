@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require './lib/link'
-require './lib/database_connection'
+require './database_connection_setup'
 
 class BookmarkManager < Sinatra::Base
   get "/" do
@@ -9,7 +9,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post "/url" do
-    Link.create(url: params[:url]) # we pass a hash cause db has a hash structure 
+    Link.create(url: params[:url]) # we pass a hash cause db has a hash structure
     redirect("/")
   end
 

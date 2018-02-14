@@ -213,3 +213,72 @@ config.before(:each) do
   require_relative './test_database_setup'
 end
 ```
+
+## ex. 10
+
+Instead of having this long logic in `Link` class:
+```ruby
++  def self.create(hash)
++    if ENV['ENVIRONMENT'] == "test"
++      connection = PG.connect(dbname: 'bookmark_manager_test')
++    else
++      connection = PG.connect(dbname: 'bookmark_manager')
++    end
++    connection.exec("INSERT INTO links (url) VALUES('#{hash[:url]}')")
++  end
+```
+We're goin to create a new `DatabaseConnection` to:
+* setup the connection at the boot of the application
+  * in order to do it automatically once we run the application, we need to`require './database_connection_setup'` in the app.rb file.
+  * inside of `./database_connection_setup` file we specify which database do we want to connect to.
+   ```ruby
+   # inside database_connection_setup.rb
+   require './lib/database_connection'
+
+   if ENV['ENVIRONMENT'] == 'test'
+     DatabaseConnection.setup('bookmark_manager_test')
+   else
+     DatabaseConnection.setup('bookmark_manager')
+   end
+   ```
+  * `'./database_connection_setup'` is calling a `setup` method on `DatabaseConnection` (it knows this class because we require the file at the top) with an argument of a database.
+  * this method is creating a connection.
+
+  ```ruby
+  # inside database_connection.rb
+  class DatabaseConnection
+    def self.setup(database_name)
+      @connection = PG.connect(dbname: database_name)
+    end
+  ```
+  * Now the connection is created and we don't need to do it manually.
+* query the database.
+  * `DatabaseConnection` has also additional method - `query` - which allows to create and execute queries in the database (picked in `setup`).
+  * How it works inside the Link class:
+
+  ```ruby
+  require 'pg'
+  require 'database_connection'
+
+  class Link
+
+    def self.all
+      result = DatabaseConnection.query("SELECT * FROM links")
+      result.map { |link| link['url'] }
+    end
+
+    def self.create(hash)
+      DatabaseConnection.query("INSERT INTO links (url) VALUES('#{hash[:url]}')")
+    end
+
+  end
+  ```
+  The method `query` itself:
+  ```ruby
+  class DatabaseConnection
+    def self.query(sql)
+     @connection.exec(sql)
+    end
+  end
+  ```
+> Note: we're using class methods on DatabaseConnection because our DatabaseConnection is never going to be instantiated. It's a 'Singleton' object: there's only one DatabaseConnection in the application.
