@@ -16,12 +16,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   post "/url" do
-    begin 
+    begin
       Link.create(params[:url])
-    rescue => e
+    rescue Exception => e
       flash[:error] = e.message
     end
-    
+
     redirect("/")
   end
 
