@@ -1,6 +1,6 @@
 require 'pg'
 require_relative 'database_connection'
-require 'uri'
+# require 'uri'
 
 class Link
   def self.all

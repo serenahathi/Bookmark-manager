@@ -10,6 +10,14 @@ task :setup do
     end
 
     connection = PG.connect(dbname: database)
+
+    ## This will stop the NOTICE warnings when running RSpec, we dont need to do anything with the Exception
+    # begin
+    # connection.exec("CREATE TABLE links(id SERIAL PRIMARY KEY, url VARCHAR(60));")
+    # rescue Exception => e
+    #   p e.message
+    # end
+
     connection.exec("CREATE TABLE IF NOT EXISTS links(id SERIAL PRIMARY KEY, url VARCHAR(60));")
   end
 end
