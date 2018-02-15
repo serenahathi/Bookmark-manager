@@ -21,6 +21,9 @@ RSpec.configure do |config|
   config.before(:each) do
     # Rake::Task['setup'].execute
     Rake::Task['test_database_setup'].execute
+    ### This will only load the p statement in Rakefile once
+    ### at the top of the task
+    # Rake::Task['test_database_setup'].invoke
   end
 
   config.expect_with :rspec do |expectations|

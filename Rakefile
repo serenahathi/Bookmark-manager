@@ -15,6 +15,8 @@ task :setup do
 end
 
 task :test_database_setup do
+  # p "This is a string" - Invoke in spec_helper task
+
   connection = PG.connect(dbname: 'bookmark_manager_test')
 
   connection.exec("TRUNCATE links RESTART IDENTITY;")
